@@ -1,0 +1,79 @@
+/* ==========================================
+   KS._ Personal Website Styles
+   ========================================== */
+
+/* Base */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(8px, -8px); }
+    66% { transform: translate(-4px, 4px); }
+}
+
+.float { 
+    animation: float 8s ease-in-out infinite; 
+}
+
+.drift { 
+    animation: drift 12s ease-in-out infinite; 
+}
+
+/* Card Interactions */
+.card-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+    box-shadow: 0 20px 40px -12px rgba(79, 70, 229, 0.15);
+}
+
+/* Link Arrow Animation */
+.link-arrow::after {
+    content: ' ↗';
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.link-arrow:hover::after {
+    transform: translate(2px, -2px);
+}
+
+/* Subtle Grid Background */
+.grid-subtle {
+    background-size: 60px 60px;
+    background-image: 
+        linear-gradient(to right, rgba(79, 70, 229, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 70, 229, 0.03) 1px, transparent 1px);
+}
+
+/* Loading State */
+.section-loading {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-loading::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 2px solid #4F46E5;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
