@@ -216,9 +216,9 @@ def main():
 
     # Prepare replacements for primary_stats.html
     primary_stats_replacements = {
-        'total_commits': (r'(?s)(TOTAL_COMMITS\s*</p>.*?<p class="text-\[120px\][^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{stats["total_commits"]:,}\g<2>'),
-        'current_streak': (r'(?s)(Current_Streak\s*</p>\s*<p class="text-6xl font-black leading-none">)\s*.*?\s*(<span class="text-2xl ml-1">DAYS</span>\s*</p>)', rf'\g<1>{stats["current_streak"]}\g<2>'),
-        'total_repos': (r'(?s)(Total_Repos\s*</p>\s*<p class="text-6xl font-black leading-none">)\s*.*?\s*(</p>)', rf'\g<1>{stats["total_repos"]}\g<2>')
+        'total_commits': (r'(?s)(TOTAL_COMMITS\s*</p>.*?<p [^>]*class="[^"]*text-\[120px\][^"]*"[^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{stats["total_commits"]:,}\g<2>'),
+        'current_streak': (r'(?s)(Current_Streak\s*</p>\s*<p [^>]*class="[^"]*text-[56]xl[^"]*"[^>]*>)\s*.*?\s*(<span[^>]*>DAYS</span>\s*</p>)', rf'\g<1>{stats["current_streak"]}\g<2>'),
+        'total_repos': (r'(?s)(Total_Repos\s*</p>\s*<p [^>]*class="[^"]*text-[56]xl[^"]*"[^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{stats["total_repos"]}\g<2>')
     }
 
     # Prepare replacements for analytics.html
@@ -226,10 +226,10 @@ def main():
     scaled_heights = [int((val / max_act) * 90) or 5 for val in stats['weekly_activity']]
     
     analytics_replacements = {
-        'total_stars': (r'(Stars: ).*?(</h4>)', rf'\g<1>{format_number(stats["total_stars"])}\g<2>'),
-        'total_prs': (r'(PRs: ).*?(</h4>)', rf'\g<1>{stats["total_prs"]}\g<2>'),
-        'total_lines': (r'(?s)(Total_Lines_Committed\s*</p>\s*</div>\s*<p class="text-7xl[^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{format_number(estimated_lines)}+\g<2>'),
-        'avg_monthly': (r'(?s)(Activity_Flow\s*</h3>\s*</div>\s*<div class="text-right">\s*<p class="text-4xl[^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{avg_monthly}\g<2>')
+        'total_stars': (r'(Stars: ).*?(\s*</h4>)', rf'\g<1>{format_number(stats["total_stars"])}\g<2>'),
+        'total_prs': (r'(PRs: ).*?(\s*</h4>)', rf'\g<1>{stats["total_prs"]}\g<2>'),
+        'total_lines': (r'(?s)(Total_Lines_Committed\s*</p>\s*</div>\s*<p [^>]*class="[^"]*text-[67]xl[^"]*"[^>]*>)\s*.*?\s*(</p>)', rf'\g<1>{format_number(estimated_lines)}+\g<2>'),
+        'avg_monthly': (r'(?s)(<p [^>]*class="[^"]*text-[34]xl[^"]*"[^>]*>)\s*.*?\s*(</p>\s*<p [^>]*>Avg_Monthly</p>)', rf'\g<1>{avg_monthly}\g<2>')
     }
     
     # Update bars manually in analytics.html content
