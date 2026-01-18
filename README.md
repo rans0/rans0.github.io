@@ -1,53 +1,53 @@
 # Brutalist GitHub Stats Dashboard (rans0.github.io)
 
-Sebuah dashboard personal dengan estetika **Brutalist Ink Splatter** yang menampilkan statistik GitHub secara real-time dan otomatis. Dashboard ini dirancang untuk memberikan visualisasi performa developer secara dinamis dan modern.
+A personal dashboard with a **Brutalist Ink Splatter** aesthetic that displays GitHub statistics in real-time and automatically. This dashboard is designed to provide a dynamic and modern visualization of developer performance.
 
-## 🚀 Fitur Utama
+## 🚀 Key Features
 
-- **Modular Architecture**: Menggunakan sistem *dynamic section loader* untuk memisahkan komponen HTML (Header, Hero, Stats, Social, dll) agar mudah dikelola.
-- **Fully Automated Stats**: Statistik diperbarui secara otomatis setiap hari menggunakan GitHub Actions dan Python.
-- **Dynamic Activity Flow**: Grafik batang mingguan yang berubah tingginya sesuai dengan jumlah commit asli dalam 7 hari terakhir.
-- **Responsive Design**: Tampilan yang optimal baik di desktop maupun perangkat mobile dengan sentuhan animasi brutalist.
+- **Modular Architecture**: Uses a *dynamic section loader* system to separate HTML components (Header, Hero, Stats, Social, etc.) for easy management.
+- **Fully Automated Stats**: Statistics are automatically updated daily using GitHub Actions and Python.
+- **Dynamic Activity Flow**: A weekly bar chart that adjusts its height according to the actual number of commits in the last 7 days.
+- **Responsive Design**: Optimized for both desktop and mobile devices with a touch of brutalist animation.
 
-## 📊 Data & Otomatisasi
+## 📊 Data & Automation
 
-Seluruh angka dan grafik pada dashboard ini ditarik langsung dari GitHub GraphQL API menggunakan script Python (`scripts/update_stats.py`).
+All numbers and charts on this dashboard are pulled directly from the GitHub GraphQL API using a Python script (`scripts/update_stats.py`).
 
-| Data | Deskripsi | Logika Otomatisasi |
+| Data | Description | Automation Logic |
 | :--- | :--- | :--- |
-| **Total Commits** | Jumlah seluruh commit seumur hidup profil. | Diambil dari `totalCommitContributions`. |
-| **Current Streak** | Jumlah hari berturut-turut melakukan commit. | Dihitung dari kalender kontribusi 365 hari terakhir. |
-| **Total Repos** | Jumlah repository yang dimiliki. | Diambil dari `repositories.totalCount`. |
-| **Stars & PRs** | Akumulasi bintang dan Pull Requests. | Penjumlahan otomatis dari seluruh metadata repo. |
-| **Activity Flow** | Grafik batang Senin - Minggu. | Menampilkan tren commit 7 hari terakhir secara proporsional. |
-| **Lines Committed** | Estimasi volume kode yang dikerjakan. | Dihitung berdasarkan formula: `(Disk Usage KB * 40) + (Commits * 100)`. |
-| **AVG Monthly** | Rata-rata kontribusi bulanan. | Total kontribusi tahunan dibagi 12. |
+| **Total Commits** | Total lifetime commits of the profile. | Retrieved from `totalCommitContributions` across all years. |
+| **Current Streak** | Number of consecutive days with commits. | Calculated from the contribution calendar (last 365 days). |
+| **Total Repos** | Number of repositories owned. | Retrieved from `repositories.totalCount`. |
+| **Stars & PRs** | Accumulated stars and Pull Requests. | Automatic summation from all repository metadata. |
+| **Activity Flow** | Monday - Sunday bar chart. | Displays commit trends for the last 7 days proportionally. |
+| **Lines Committed** | Estimated volume of code worked on. | Calculated using the formula: `(Disk Usage KB * 40) + (Commits * 100)`. |
+| **AVG Monthly** | Average monthly contributions. | Total contributions this year divided by the current month. |
 
-## 🛠 Teknologi yang Digunakan
+## 🛠 Tech Stack
 
 - **Frontend**: HTML5, Vanilla CSS (Brutalist Style), Tailwind CSS.
 - **Automation**: Python 3.x, GitHub Actions (Workflow).
 - **API**: GitHub GraphQL API v4.
 - **Hosting**: GitHub Pages.
 
-## ⚙️ Cara Menjalankan Secara Lokal
+## ⚙️ How to Run Locally
 
-Karena proyek ini menggunakan fitur `fetch` untuk memuat modul HTML, Anda tidak bisa sekadar membuka file `index.html`. Anda harus menggunakan web server lokal:
+Since this project uses the `fetch` feature to load HTML modules, you cannot simply open the `index.html` file. You must use a local web server:
 
 ```bash
-# Menggunakan Python
+# Using Python
 python3 -m http.server 8000
 ```
-Lalu buka `localhost:8000` di browser Anda.
+Then open `localhost:8000` in your browser.
 
-## 🤖 Menyiapkan Otomatisasi (GitHub Actions)
+## 🤖 Setting Up Automation (GitHub Actions)
 
-Untuk mengaktifkan pembaruan otomatis setiap jam 12 malam (WIB):
+To enable automatic updates every 12 AM (UTC/GMT+7):
 
-1. Buat **Personal Access Token (PAT)** di akun GitHub Anda dengan scope `repo` dan `user`.
-2. Masuk ke **Settings** repository > **Secrets and variables** > **Actions**.
-3. Tambahkan **New repository secret** dengan nama `GH_TOKEN` dan isi dengan token PAT Anda.
-4. Pastikan **Settings** > **Pages** > **Build and deployment** > Source diatur ke **"GitHub Actions"**.
+1. Create a **Personal Access Token (PAT)** in your GitHub account with `repo` and `user` scopes.
+2. Go to repository **Settings** > **Secrets and variables** > **Actions**.
+3. Add a **New repository secret** named `GH_TOKEN` and fill it with your PAT token.
+4. Ensure **Settings** > **Pages** > **Build and deployment** > Source is set to **"GitHub Actions"**.
 
 ---
 *Built with code, logic, and a bit of chaos.* ✨
